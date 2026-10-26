@@ -129,12 +129,3 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic output-topic
 | 问题3 | `output-topic` 中每条消息形如 `product_042:17`，且同一窗口内各商品计数之和等于窗口内消息总数 |
 
 真实运行结果见 [result.md](result.md)。
-
----
-
-## 7. 已知局限（面试"项目不足"素材）
-
-1. **语义是 at-least-once 而非 exactly-once**：Spark 的 Kafka Sink 默认使用非事务型 producer，任务失败重试时同一批次可能重复写入；要实现端到端 exactly-once，需下游按 `(窗口, 商品)` 幂等去重，或使用支持事务的链路（如写入带主键的存储做 upsert）；
-2. 事件时间取自 Kafka 到达时间，不是业务发生时间；真实场景应在消息体中携带 `event_time` 字段并解析；
-3. 窗口固定 30 秒滚动窗口，未演示滑动窗口/会话窗口；
-4. 单机 `local[*]`，未做 Kafka 分区数、Spark 并行度与状态后端调优。

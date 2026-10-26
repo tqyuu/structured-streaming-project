@@ -121,12 +121,3 @@ python wordcount.py --mode parquet --output D:/tmp/wordcount_output \
 | 问题3 | 输出目录按批生成 parquet 文件，回读可见 `window_start/window_end/word/count`；检查点目录包含 `offsets/commits/state` |
 
 真实运行结果见 [result.md](result.md)。
-
----
-
-## 7. 已知局限（可作为面试"项目不足"的答案）
-
-1. socket 源**不可重放、无容错**，仅适合教学；生产应替换为 Kafka/Flume；
-2. `event_time` 是"数据到达时间"而非业务事件时间，真实场景应在消息体内携带时间戳；
-3. 未做标点剥离与大小写归一化（可加 `lower` + `regexp_replace`）；
-4. 本地 `local[*]` 单机运行，未做并行度/状态后端（RocksDB）调优。
