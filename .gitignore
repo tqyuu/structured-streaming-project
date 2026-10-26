@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Spark / 运行产物
+spark-warehouse/
+metastore_db/
+derby.log
+*.log
+checkpoint/
+_checkpoint*/
+wordcount_output/
+wordcount_checkpoint/
+*.parquet
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
