@@ -33,6 +33,7 @@
 ```
 structured-streaming-project/
 ├── README.md                          # 本文件
+├── 班级_学号_姓名.py                  # ★ 作业提交版：两题合一单文件（提交前按“班级_学号_姓名”改名）
 ├── docs/
 │   └── INTERVIEW_QA.md                # 面试深挖问答（重点复习材料）
 ├── problem1_socket_wordcount/
@@ -55,6 +56,25 @@ structured-streaming-project/
 - JDK 8/11/17（Spark 4.x 需 Java 17+）
 - 题目二另需 Kafka 2.x/3.x（云平台已部署则跳过）
 - **Windows 本地调试注意**：代码里的 `/tmp/...` 默认路径是 Linux 风格，本地跑请加参数改成 Windows 路径（如 `--output D:/tmp/wordcount_output`）
+
+### 单文件提交版（两题合一）
+
+`班级_学号_姓名.py` 把两道题目写在一个文件里，用第一个参数选择具体小题：
+
+```bash
+# 题目一
+python 班级_学号_姓名.py p1-mock     # 造数据（Windows，等价于 nc -lk 9999）
+python 班级_学号_姓名.py p1-1        # 问题1：Complete 模式，控制台全量词频
+python 班级_学号_姓名.py p1-2        # 问题2：只统计 3-5 字母单词
+python 班级_学号_姓名.py p1-3 --output D:/tmp/wordcount_output --checkpoint D:/tmp/wc_ckpt
+
+# 题目二
+python 班级_学号_姓名.py p2-1        # 问题1：Kafka 生产者
+python 班级_学号_姓名.py p2-2        # 问题2：30s 窗口聚合 -> 控制台
+python 班级_学号_姓名.py p2-3 --kafka-checkpoint D:/tmp/kafka_ckpt   # 问题3：写回 output-topic
+
+# 公共：--runtime 60 表示跑 60 秒后自动停止（演示/上交录屏用），--master 指定集群
+```
 
 ### 题目一：Socket 词频统计
 
